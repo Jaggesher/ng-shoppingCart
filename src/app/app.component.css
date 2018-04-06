@@ -1,0 +1,22 @@
+#ContentOfBody{
+    bottom: 0;
+    left: 0;
+    position: relative;
+    right: 0;
+    top: 0;
+    min-height: 100vh;
+}
+
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    color: #5a5a5a;
+  }
+
+  .featurette-divider {
+    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  }
