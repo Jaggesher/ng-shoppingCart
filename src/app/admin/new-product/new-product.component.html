@@ -1,3 +1,52 @@
-<p>
-  new-product works!
-</p>
+<div class="container ">
+	<br>
+    <div class="col-sm-8  offset-sm-2 jumbotron">
+			<h2 class="display-5">Add New Product.</h2>
+			<hr>
+			<form>
+
+				<div class="form-group">
+					<label for="customFile">Image: </label>
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" id="customFile" aria-describedby="customFileHelp">
+						<label class="custom-file-label" for="customFile">Choose Image</label>
+					</div>
+					<small id="customFileHelp" class="form-text text-muted">Select Related Product Image.</small>
+				</div>
+				
+
+				<div class="form-group">
+					<label for="description">Description: </label>
+					<textarea class="form-control" id="description" aria-describedby="descriptionHelp" placeholder="Enter Description" rows="6"></textarea>
+					<small id="descriptionHelp" class="form-text text-muted">Description of related products</small>
+				</div>
+
+				<div class="form-group">
+					<label for="category">Category: </label>
+					<select class="form-control" id="category" aria-describedby="categoryHelp">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+					</select>
+					<small id="categoryHelp" class="form-text text-muted">select related category.</small>
+				</div>
+				
+				<div class="form-group">
+					<label for="price">Price: </label>
+					<input type="number" class="form-control" id="price" aria-describedby="numberHelp" placeholder="Enter Price" min="1">
+					<small id="numberHelp" class="form-text text-muted">product price must be non negative.</small>
+				</div>
+
+				<div class="form-group">
+					<label for="stock">Stock: </label>
+					<input type="number" class="form-control" id="stock" aria-describedby="stockHelp" placeholder="Enter Stock" min="0">
+					<small id="stockHelp" class="form-text text-muted">product stock must be non negative.</small>
+				</div>
+				
+				<button type="submit" class="btn btn-primary">Submit</button>
+		  </form>
+    </div>
+
+</div>
