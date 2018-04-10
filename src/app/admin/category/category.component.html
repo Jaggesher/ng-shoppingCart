@@ -4,7 +4,7 @@
 	<div class="col-sm-8 offset-sm-2 jumbotron">
 		<h2 class="display-5">All Category</h2>
 		<hr>
-		<table class="table table-bordered">
+		<table class="table table-bordered" *ngIf="AllCategories">
 			<thead>
 				<tr>
 					<th scope="col">#</th>
@@ -13,19 +13,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Mark</td>
-					<td><button class="btn btn-danger">Delete</button></td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Jacob</td>
-					<td><button class="btn btn-danger">Delete</button></td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Larry the Bird</td>
+				<tr *ngFor="let category of AllCategories; let i=index;">
+					<th scope="row">{{i+1}}</th>
+					<td>{{category.productCategory}}</td>
 					<td><button class="btn btn-danger">Delete</button></td>
 				</tr>
 			</tbody>
