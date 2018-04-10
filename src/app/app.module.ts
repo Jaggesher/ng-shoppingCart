@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { ShopperModule } from './shopper/shopper.module';
 import { AdminModule } from './admin/admin.module';
+import { CommonService } from './shared/services/common.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,7 @@ import { AdminModule } from './admin/admin.module';
     ShopperModule,
     AdminModule
   ],
-  providers: [],
+  providers: [CommonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
