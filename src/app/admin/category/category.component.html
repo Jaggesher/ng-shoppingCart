@@ -25,16 +25,26 @@
 	<div class="col-sm-8  offset-sm-2 jumbotron">
 		<h2 class="display-5">Add New Category.</h2>
 		<hr>
-		<form #newCategory="ngForm" (ngSubmit)=addCategory(newCategory)>
+		<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" novalidate>
 
 			<div class="form-group">
 				<label for="category">Category: </label>
-				<input type="text" class="form-control" id="category" aria-describedby="categoryHelp" placeholder="Enter Category" [ngModel]="category"
-				 min="0" name="category">
+				
+				<input type="text" class="form-control" id="category" aria-describedby="categoryHelp" placeholder="Enter Category" formControlName="category">
+				
+				<div *ngIf="category.errors && (category.dirty || category.touched)" >  
+					<span *ngIf="category.errors.maxlength">  
+						max length is 45  
+					</span>  
+					<span *ngIf="category.errors.required">  
+						category is required  
+					</span> 
+				</div>
+
 				<small id="categoryHelp" class="form-text text-muted">Category for product.</small>
 			</div>
 
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary" [disabled]='!categoryForm.valid'>Submit</button>
 		</form>
 	</div>
 </div>
