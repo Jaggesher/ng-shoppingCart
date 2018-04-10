@@ -12,7 +12,8 @@ export class CategoryComponent implements OnInit {
   constructor(private _commonService: CommonService) { }
 
   ngOnInit() {
-    this.AllCategories = this._commonService.getAllCategory();
+    this._commonService.getAllCategory()
+    .subscribe(data => this.AllCategories = data);
   }
   
   addCategory(newCategory: NgForm): void {

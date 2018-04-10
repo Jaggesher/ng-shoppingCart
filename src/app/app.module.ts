@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -18,6 +19,7 @@ import { CommonService } from './shared/services/common.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ShopperModule,
     AdminModule
   ],
