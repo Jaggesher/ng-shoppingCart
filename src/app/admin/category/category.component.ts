@@ -10,7 +10,7 @@ import { NewCategory } from '../Models/new-category';
     styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-
+    public isRequesting: boolean;
     public AllCategories: object = [];
     public categoryForm: FormGroup;
     public category: FormControl;
@@ -29,8 +29,12 @@ export class CategoryComponent implements OnInit {
     }
 
     private getCategory() {
+        this.isRequesting = true;
         this._commonService.getAllCategory()
-            .subscribe(data => this.AllCategories = data, error => console.log(error));
+            .subscribe(data => {
+                this.AllCategories = data;
+                this.isRequesting = false;
+            }, error => console.log(error));
     }
 
 
@@ -49,9 +53,11 @@ export class CategoryComponent implements OnInit {
 
             this.myNewCategory = new NewCategory();
             this.myNewCategory.ProductCategory = this.category.value;
+            this.isRequesting = true;
 
             this._adminService.addNewCategory(this.myNewCategory)
                 .subscribe(data => {
+                    this.isRequesting = false;
                     this.getCategory();
                     console.log(data);
                 }, error => console.log(error));

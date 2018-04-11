@@ -20,6 +20,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<app-spinner [isRunning]="isRequesting"></app-spinner> 
 	</div>
 
 	<div class="col-sm-8  offset-sm-2 jumbotron">
@@ -43,8 +44,11 @@
 
 				<small id="categoryHelp" class="form-text text-muted">Category for product.</small>
 			</div>
-
-			<button type="submit" class="btn btn-primary" [disabled]='!categoryForm.valid'>Submit</button>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" [disabled]='!categoryForm.valid'>Submit</button>
+				<app-spinner [isRunning]="isRequesting"></app-spinner> 
+			</div>
+			
 		</form>
 	</div>
 </div>
