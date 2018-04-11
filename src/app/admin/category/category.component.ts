@@ -60,7 +60,10 @@ export class CategoryComponent implements OnInit {
                     this.isRequesting = false;
                     this.getCategory();
                     console.log(data);
-                }, error => console.log(error));
+                }, error =>{
+                    this.isRequesting = false;
+                    console.log(error);
+                });
 
             this.categoryForm.reset();
         }

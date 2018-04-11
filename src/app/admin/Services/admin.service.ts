@@ -25,4 +25,26 @@ export class AdminService extends BaseService {
 				catchError(val => this.handleError(new HttpErrorResponse(val)))
 			);
 	}
+
+	addNewProduct(Img, CategoryId, Description, InStock, Price) {
+		
+		const httpOptions = {
+			headers: new HttpHeaders({
+			})
+		}
+
+		const fd = new FormData();
+
+		fd.append('Img', Img, Img.name);
+		fd.append('CategoryId', CategoryId);
+		fd.append('Description', Description);
+		fd.append('InStock', InStock);
+		fd.append('Price', Price);
+
+		return this.http.post(`${environment.baseUrl}/api/admin/AddProduct`, fd)
+			.pipe(
+				catchError(val => this.handleError(new HttpErrorResponse(val)))
+			);
+
+	}
 }

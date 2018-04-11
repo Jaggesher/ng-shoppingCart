@@ -11,17 +11,18 @@ import { AdminService } from '../Services/admin.service';
 })
 export class NewProductComponent implements OnInit {
 
+	public isRequesting: boolean;
 	public allCategory: Object[];
 	public productForm: FormGroup;
-	public customFile: FormControl;
+	public customFile: File = null;
 	public description: FormControl;
 	public category: FormControl;
 	public price: FormControl;
 	public stock: FormControl;
+	public isFileValid: boolean = false;
 
 	private createForm() {
 		this.productForm = new FormGroup({
-			customFile: this.customFile,
 			description: this.description,
 			category: this.category,
 			price: this.price,
@@ -30,7 +31,7 @@ export class NewProductComponent implements OnInit {
 	}
 
 	private createFormControls() {
-		this.customFile = new FormControl();
+
 		this.category = new FormControl('', [
 			Validators.required,
 		]);
@@ -51,8 +52,17 @@ export class NewProductComponent implements OnInit {
 	}
 
 	private getCategory() {
+		this.isRequesting = true;
 		this._commonService.getAllCategory()
-			.subscribe(data => this.allCategory = data, error => console.log(error));
+			.subscribe(data => {
+				this.allCategory = data;
+				this.isRequesting = false;
+			}, error => console.log(error));
+	}
+
+	onFileSelected(event) {
+		this.customFile = event.target.files[0];
+		this.isFileValid = true;
 	}
 
 	constructor(private _commonService: CommonService, private _adminService: AdminService) { }
@@ -64,6 +74,17 @@ export class NewProductComponent implements OnInit {
 	}
 
 	onSubmit() {
-		console.log(this.customFile);
+		this.isRequesting = true;
+		this._adminService.addNewProduct(this.customFile, this.category.value, this.description.value, this.stock.value, this.price.value)
+			.subscribe(data => {
+				this.isRequesting = false;
+				console.log(data);
+			}, error =>{
+				this.isRequesting = false;
+				console.log(error);
+			});
+
+		this.productForm.reset();
+
 	}
 }
