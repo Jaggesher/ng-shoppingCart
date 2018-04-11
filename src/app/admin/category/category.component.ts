@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonService } from '../../shared/services/common.service';
 import { AdminService } from '../Services/admin.service';
+import { error } from 'protractor';
 @Component({
     selector: 'app-category',
     templateUrl: './category.component.html',
@@ -36,7 +37,7 @@ export class CategoryComponent implements OnInit {
         this.createForm();
 
         this._commonService.getAllCategory()
-            .subscribe(data => this.AllCategories = data);
+            .subscribe(data => this.AllCategories = data, error => console.log(error));
     }
 
     addCategory(newCategory: NgForm): void {
