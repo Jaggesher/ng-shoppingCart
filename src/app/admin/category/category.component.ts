@@ -28,6 +28,10 @@ export class CategoryComponent implements OnInit {
         ])
     }
 
+    private getCategory() {
+        this._commonService.getAllCategory()
+            .subscribe(data => this.AllCategories = data, error => console.log(error));
+    }
 
 
     constructor(private _commonService: CommonService, private _adminService: AdminService) { }
@@ -36,9 +40,8 @@ export class CategoryComponent implements OnInit {
 
         this.createFormControls();
         this.createForm();
+        this.getCategory();
 
-        this._commonService.getAllCategory()
-            .subscribe(data => this.AllCategories = data, error => console.log(error));
     }
 
     onSubmit() {
@@ -48,10 +51,13 @@ export class CategoryComponent implements OnInit {
             this.myNewCategory.ProductCategory = this.category.value;
 
             this._adminService.addNewCategory(this.myNewCategory)
-            .subscribe(data => console.log(data), error => console.log(error));
+                .subscribe(data => {
+                    this.getCategory();
+                    console.log(data);
+                }, error => console.log(error));
 
             this.categoryForm.reset();
-          }
+        }
     }
-    
+
 }
