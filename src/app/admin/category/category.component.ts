@@ -50,7 +50,6 @@ export class CategoryComponent implements OnInit {
             this._adminService.addNewCategory(this.myNewCategory)
             .subscribe(data => console.log(data), error => console.log(error));
 
-            console.log("Form Submitted!", this.categoryForm.value);
             this.categoryForm.reset();
           }
     }
