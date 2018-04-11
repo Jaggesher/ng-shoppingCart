@@ -3,6 +3,7 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonService } from '../../shared/services/common.service';
 import { AdminService } from '../Services/admin.service';
 import { error } from 'protractor';
+import { NewCategory } from '../Models/new-category';
 @Component({
     selector: 'app-category',
     templateUrl: './category.component.html',
@@ -13,7 +14,7 @@ export class CategoryComponent implements OnInit {
     public AllCategories: object = [];
     public categoryForm: FormGroup;
     public category: FormControl;
-
+    public myNewCategory: NewCategory;
     private createForm() {
         this.categoryForm = new FormGroup({
             category: this.category
@@ -40,12 +41,15 @@ export class CategoryComponent implements OnInit {
             .subscribe(data => this.AllCategories = data, error => console.log(error));
     }
 
-    addCategory(newCategory: NgForm): void {
-        console.log(newCategory.value);
-    }
-
     onSubmit() {
         if (this.categoryForm.valid) {
+
+            this.myNewCategory = new NewCategory();
+            this.myNewCategory.ProductCategory = this.category.value;
+
+            this._adminService.addNewCategory(this.myNewCategory)
+            .subscribe(data => console.log(data), error => console.log(error));
+
             console.log("Form Submitted!", this.categoryForm.value);
             this.categoryForm.reset();
           }

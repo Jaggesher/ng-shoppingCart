@@ -1,3 +1,3 @@
-export interface NewCategory {
-    
+export class NewCategory {
+    ProductCategory: string;
 }
