@@ -4,7 +4,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Category } from '../models/category';
 import { Observable } from 'rxjs/Observable';
 import { BaseService } from './base.service';
-import { catchError } from 'rxjs/operators'
+import { catchError, retry } from 'rxjs/operators'
+import { Product } from '../models/product';
 
 @Injectable()
 export class CommonService extends BaseService {
@@ -16,5 +17,12 @@ export class CommonService extends BaseService {
 		.pipe(
 			catchError(val => this.handleError(new HttpErrorResponse(val)))
 		  );
+	}
+
+	getAllProduct(): Observable<Product[]> {
+		return this.http.get<Product[]>(`${environment.baseUrl}/api/General/AllProducts`)
+		.pipe(
+			catchError(val => this.handleError(val))
+		);
 	}
 }
