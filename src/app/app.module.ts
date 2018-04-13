@@ -10,11 +10,13 @@ import { FooterComponent } from './footer/footer.component';
 import { ShopperModule } from './shopper/shopper.module';
 import { AdminModule } from './admin/admin.module';
 import { CommonService } from './shared/services/common.service';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
