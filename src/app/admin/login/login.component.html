@@ -1,3 +1,69 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <br>
+  <br>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading"> Admin Login</div>
+
+                <div class="panel-body">
+                    <form class="form-horizontal" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+                    
+
+                        <div class="form-group" [ngClass]="{'has-error': name.invalid && (name.dirty || name.touched) , 'has-success': name.valid && name.dirty }">
+                            <label for="name" class="col-md-4 control-label">User Name</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control" formControlName="name" autofocus>
+                                    <span class="help-block" *ngIf="name.errors && (name.dirty || name.touched)">
+                                        <strong *ngIf="name.errors.required">  
+                                            name field is Required. 
+                                        </strong>
+                                        <strong *ngIf="name.errors.maxlength">  
+                                            name atmost 100 charactes long.
+                                        </strong>
+                                        <strong *ngIf="name.errors.minlength">  
+                                            name needs minimum 3 charactes
+                                        </strong>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{'has-error': password.invalid && (password.dirty || password.touched) , 'has-success': password.valid && password.dirty }">
+                            <label for="password" class="col-md-4 control-label">Password</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" formControlName="password">
+                               
+                                    <span class="help-block" *ngIf="password.errors && (password.dirty || password.touched)">
+                                        <strong *ngIf="password.errors.required">  
+                                            password field is Required. 
+                                        </strong>
+                                        <strong *ngIf="password.errors.maxlength">  
+                                            password atmost 100 charactes long.
+                                        </strong>
+                                        <strong *ngIf="password.errors.minlength">  
+                                            password needs minimum 6 charactes
+                                        </strong>
+                                    </span>
+                
+                            </div>
+                        </div>
+
+                        
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary" [disabled]='!loginForm.valid' >
+                                    Login
+                                </button>
+                            </div>
+                            <app-spinner [isRunning]="isRequesting"></app-spinner> 
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
