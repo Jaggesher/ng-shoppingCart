@@ -5,6 +5,8 @@ import { NewCategory } from '../Models/new-category';
 import { environment } from '../../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
+import { Credential } from '../Models/credential';
+import { Auth } from '../Models/auth';
 
 
 @Injectable()
@@ -27,7 +29,7 @@ export class AdminService extends BaseService {
 	}
 
 	addNewProduct(Img, CategoryId, Description, InStock, Price) {
-		
+
 		const httpOptions = {
 			headers: new HttpHeaders({
 			})
@@ -47,4 +49,19 @@ export class AdminService extends BaseService {
 			);
 
 	}
+
+	loin(_credential: Credential): Observable<Auth> {
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+			})
+		}
+
+		return this.http.post(`${environment.baseUrl}/api/auth/login`, _credential, httpOptions)
+			.pipe(
+				catchError(val => this.handleError(new HttpErrorResponse(val)))
+			);
+	}
+
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AdminService } from '../Services/admin.service';
+import { Credential } from '../Models/credential';
+import { error } from 'protractor';
 
 @Component({
 	selector: 'app-login',
@@ -12,6 +14,7 @@ export class LoginComponent implements OnInit {
 	public loginForm: FormGroup;
 	public name: FormControl;
 	public password: FormControl;
+	public credential: Credential;
 
 	private createForm() {
 		this.loginForm = new FormGroup({
@@ -41,15 +44,29 @@ export class LoginComponent implements OnInit {
 	}
 
 	onSubmit() {
-        if (this.loginForm.valid) {
+		if (this.loginForm.valid) {
 
+			this.credential = new Credential();
+
+			this.credential.UserName = this.name.value;
+			this.credential.Password = this.password.value;
 
 			this.isRequesting = true;
-			
-			console.log(this.loginForm.value);
 
-            this.loginForm.reset();
-        }
+			this._adminService.loin(this.credential).subscribe(
+				data => {
+					console.log(data);
+					this.isRequesting=false;
+				},
+				error => {
+					console.log(error);
+					this.isRequesting=false;
+				}
+			);
+			console.log(this.credential);
+
+			this.loginForm.reset();
+		}
 	}
-	
+
 }
