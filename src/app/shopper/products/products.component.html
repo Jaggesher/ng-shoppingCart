@@ -12,7 +12,7 @@
 					<h3><strong>Price: </strong> <i>{{product.price}}tk</i></h3>
 					<h4><strong>Category: </strong><i>{{product.category.productCategory}}</i></h4>
 					<div class="btn-group-lg" aria-label="...">
-						<button type="button" class="btn btn-default">View Product</button>
+						<button type="button" class="btn btn-default"> <a routerLink="/product/{{product.id}}">View Product</a></button>
 						<button type="button" class="btn btn-default">AddToCart</button>
 					</div>
 				</div>

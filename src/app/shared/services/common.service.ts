@@ -25,4 +25,11 @@ export class CommonService extends BaseService {
 			catchError(val => this.handleError(val))
 		);
 	}
+
+	getProduct(id):Observable<Product>{
+		return this.http.get<Product>(`${environment.baseUrl}/api/General/${id}`)
+		.pipe(
+			catchError(val => this.handleError(val))
+		);
+	}
 }
