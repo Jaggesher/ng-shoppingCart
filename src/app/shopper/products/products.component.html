@@ -1,6 +1,23 @@
 <div class="container">
-	<div class="row">
+	<div class="col-sm-12 text-center">
 		<app-spinner [isRunning]="isRequesting"></app-spinner>
-		<p>its works</p>
 	</div>
+
+	<div *ngIf="AllProduct">
+		<div class="col-md-4" *ngFor="let product of AllProduct">
+			<div class="thumbnail">
+				<img src="{{baseUrl+'/'+product.img}}" alt="Nature" style="width:100%">
+				<div class="caption">
+					<hr>
+					<h3><strong>Price: </strong> <i>{{product.price}}tk</i></h3>
+					<h4><strong>Category: </strong><i>{{product.category.productCategory}}</i></h4>
+					<div class="btn-group-lg" aria-label="...">
+						<button type="button" class="btn btn-default">View Product</button>
+						<button type="button" class="btn btn-default">AddToCart</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+
 </div>
