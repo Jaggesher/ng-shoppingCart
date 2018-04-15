@@ -12,6 +12,7 @@ import { error } from 'protractor';
 export class ProductComponent implements OnInit {
   public Product: Product;
   getProduct(id) {
+    console.log(id);
     this._commonService.getProduct(id).subscribe(
       data => {
         this.Product = data;
@@ -27,9 +28,8 @@ export class ProductComponent implements OnInit {
   constructor(private route: ActivatedRoute, private _commonService: CommonService) { }
 
   ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.getProduct(id);
-    console.log(id);
   }
 
 }
