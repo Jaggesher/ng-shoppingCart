@@ -12,17 +12,17 @@ import { environment } from '../../../environments/environment';
 })
 export class ProductComponent implements OnInit {
   public product: Product;
-  public baseUrl;
+  public baseUrl: string;
   public quantity: number;
   public isRequesting: boolean;
+  public id: string;
   getProduct(id) {
-    console.log(id);
     this.isRequesting = true;
 
     this._commonService.getProduct(id).subscribe(
       data => {
         this.product = data;
-        console.log(this.product);
+       // console.log(this.product);
         this.isRequesting = false;
       },
       error => {
@@ -37,9 +37,9 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.quantity = 0;
-    const id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('id');
     this.baseUrl = environment.baseUrl;
-    this.getProduct(id);
+    this.getProduct(this.id);
   }
 
   public increaseByOne() {
@@ -47,7 +47,11 @@ export class ProductComponent implements OnInit {
   }
 
   public deduceByOne() {
-
     if (this.quantity > 0) this.quantity -= 1;
+  }
+
+  public addToCart() {
+    var tem =  this._commonService.addProductToLocal(this.id,this.quantity);
+    console.log(tem);
   }
 }
