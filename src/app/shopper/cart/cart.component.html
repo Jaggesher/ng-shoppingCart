@@ -1,3 +1,96 @@
-<p>
-  cart works!
-</p>
+<div class="container">
+	<div class="col-sm-8 col-sm-offset-2">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+				<th>ProdictImage</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				<td>John</td>
+				<td>Doe</td>
+				<td>john@example.com</td>
+				<td>com</td>
+				</tr>
+				<tr>
+				<td>Mary</td>
+				<td>Moe</td>
+				<td>mary@example.com</td>
+				<td>com</td>
+				</tr>
+				<tr>
+				<td>July</td>
+				<td>Dooley</td>
+				<td>july@example.com</td>
+				<td>com</td>
+				</tr>
+			</tbody>
+			</table>
+	</div>
+
+	<div class="col-sm-8 col-sm-offset-2 jumbotron">
+		<form [formGroup]="cartForm" (ngSubmit)= "onSubmit()"  novalidate>
+
+			<div class="form-group" [ngClass]="{'has-error': name.invalid && (name.dirty || name.touched) , 'has-success': name.valid && name.dirty }">
+				<label for="name">Name: </label>
+				<input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter Name"  formControlName="name" >
+				
+				<span class="help-block" *ngIf="name.errors && (name.dirty || name.touched)" > 
+				<strong *ngIf="name.errors.required">  
+					Name field is Required. 
+				</strong>
+				<strong *ngIf="name.errors.minlength">  
+					Name minimum value 3
+				</strong>
+				<strong *ngIf="name.errors.maxlength">  
+					Name maximum value 100
+				</strong>
+				</span>
+				<small id="nameHelp" class="form-text text-muted">Shopper Name.</small>
+			</div>
+
+			<div class="form-group" [ngClass]="{'has-error': address.invalid && (address.dirty || address.touched) , 'has-success': address.valid && address.dirty }">
+				<label for="address">Address: </label>
+				<textarea class="form-control" id="address" aria-describedby="addressHelp" placeholder="Enter Address" rows="6" formControlName="address"></textarea>
+				
+				<span class="help-block" *ngIf="address.errors && (address.dirty || address.touched)" > 
+				<strong *ngIf="address.errors.required">  
+					Address field is Required. 
+				</strong>
+				<strong *ngIf="address.errors.maxlength">  
+					Address max length  995 charactes
+				</strong>
+				</span>
+				<small id="descriptionHelp" class="form-text text-muted">Address to Shipment</small>
+			</div>
+
+			<div class="form-group" [ngClass]="{'has-error': phone.invalid && (phone.dirty || phone.touched) , 'has-success': phone.valid && phone.dirty }">
+				<label for="phone">Phone: </label>
+				<input type="text" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="Enter phone"  formControlName="phone" >
+				
+				<span class="help-block" *ngIf="phone.errors && (phone.dirty || phone.touched)" > 
+				<strong *ngIf="phone.errors.required">  
+					Phone field is Required. 
+				</strong>
+				<strong *ngIf="phone.errors.minlength">  
+					Phone minimum value 3
+				</strong>
+				<strong *ngIf="phone.errors.maxlength">  
+					Phone maximum value 100
+				</strong>
+				</span>
+				<small id="phoneHelp" class="form-text text-muted">Shopper Phone.</small>
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" [disabled]='!cartForm.valid' >Checkout</button>
+				<app-spinner [isRunning]="isRequesting"></app-spinner> 
+			</div>
+			
+		</form>
+	</div>
+</div>
