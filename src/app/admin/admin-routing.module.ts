@@ -4,12 +4,13 @@ import { NewProductComponent } from './new-product/new-product.component';
 import { CategoryComponent } from './category/category.component';
 import { LoginComponent } from './login/login.component';
 import { ShipmentComponent } from './shipment/shipment.component';
+import { AuthGuardService as AuthGuard } from '../shared/services/auth-guard.service';
 
 const routes: Routes = [
-  { path: 'AddProduct', component: NewProductComponent },
-  { path: 'AddCategory', component: CategoryComponent },
+  { path: 'AddProduct', component: NewProductComponent , canActivate:[AuthGuard]},
+  { path: 'AddCategory', component: CategoryComponent, canActivate:[AuthGuard] },
   { path: 'login', component: LoginComponent},
-  { path: 'shipment', component: ShipmentComponent}
+  { path: 'shipment', component: ShipmentComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({

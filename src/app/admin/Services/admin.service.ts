@@ -51,7 +51,11 @@ export class AdminService extends BaseService {
 
 	}
 
-	loin(_credential: Credential): Observable<Auth> {
+	storeToken(auth:Auth){
+		localStorage.setItem('token',auth.auth_token);
+	}
+
+	login(_credential: Credential): Observable<Auth> {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
@@ -72,4 +76,9 @@ export class AdminService extends BaseService {
 			);
 	}
 
+	isAuthenticated():boolean{
+		 const token = localStorage.getItem('token');
+		 if(token != null) return true;
+		 return false;
+	}
 }

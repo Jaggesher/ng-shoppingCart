@@ -53,18 +53,17 @@ export class LoginComponent implements OnInit {
 
 			this.isRequesting = true;
 
-			this._adminService.loin(this.credential).subscribe(
+			this._adminService.login(this.credential).subscribe(
 				data => {
-					console.log(data);
 					this.isRequesting=false;
+					this._adminService.storeToken(data);
+					console.log("success");
 				},
 				error => {
 					console.log(error);
 					this.isRequesting=false;
 				}
 			);
-			console.log(this.credential);
-
 			this.loginForm.reset();
 		}
 	}

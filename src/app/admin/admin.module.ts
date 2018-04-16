@@ -9,6 +9,7 @@ import { AdminService } from './Services/admin.service';
 import { SharedModule } from '../shared/modules/shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { ShipmentComponent } from './shipment/shipment.component';
+import { AuthGuardService } from '../shared/services/auth-guard.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +19,6 @@ import { ShipmentComponent } from './shipment/shipment.component';
     SharedModule
   ],
   declarations: [NewProductComponent, CategoryComponent, LoginComponent, ShipmentComponent],
-  providers: [AdminService]
+  providers: [AdminService,AuthGuardService]
 })
 export class AdminModule { }
