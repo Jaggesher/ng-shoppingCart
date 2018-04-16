@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AdminService } from '../Services/admin.service';
 import { Credential } from '../Models/credential';
 import { error } from 'protractor';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-login',
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
 		])
 	}
 
-	constructor(private _adminService: AdminService) { }
+	constructor(private _adminService: AdminService, private router: Router) { }
 
 	ngOnInit() {
 		this.createFormControls();
@@ -58,6 +59,7 @@ export class LoginComponent implements OnInit {
 					this.isRequesting=false;
 					this._adminService.storeToken(data);
 					console.log("success");
+					this.router.navigate(['products']);
 				},
 				error => {
 					console.log(error);
