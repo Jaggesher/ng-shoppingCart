@@ -8,6 +8,7 @@ import { CategoryComponent } from './category/category.component';
 import { AdminService } from './Services/admin.service';
 import { SharedModule } from '../shared/modules/shared/shared.module';
 import { LoginComponent } from './login/login.component';
+import { ShipmentComponent } from './shipment/shipment.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +17,7 @@ import { LoginComponent } from './login/login.component';
     AdminRoutingModule,
     SharedModule
   ],
-  declarations: [NewProductComponent, CategoryComponent, LoginComponent],
+  declarations: [NewProductComponent, CategoryComponent, LoginComponent, ShipmentComponent],
   providers: [AdminService]
 })
 export class AdminModule { }
