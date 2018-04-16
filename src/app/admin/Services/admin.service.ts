@@ -82,6 +82,10 @@ export class AdminService extends BaseService {
 		 return false;
 	}
 
+	clearToken(){
+		localStorage.removeItem('token');
+	}
+
 	confirmShipment(Id):Observable<any>{
 		const httpOptions = {
 			headers: new HttpHeaders({
