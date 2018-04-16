@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { error } from 'protractor';
 import { Product } from '../../shared/models/product';
+import { Cart } from '../../shared/models/cart';
 
 @Component({
     selector: 'app-cart',
@@ -74,6 +75,27 @@ export class CartComponent implements OnInit {
     }
 
     onSubmit() {
+        this.isRequesting = true;
+        if (this.cartForm.valid) {
+            var _cart = new Cart();
+            _cart.Name = this.name.value;
+            _cart.Address = this.address.value;
+            _cart.Phone = this.phone.value;
+            _cart.TotalCost = this.total;
+
+            this._commonService.saveShipment(_cart).subscribe(
+                data => {
+                    this._commonService.clearLocalStorage();
+                    this.isRequesting = false;
+                    this.getProducts();
+                }, error => {
+                    console.log(error);
+                    this.isRequesting = false;
+                }
+            );
+        }
+
+
         console.log(this.cartForm.value);
     }
 

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { BaseService } from './base.service';
 import { catchError, retry } from 'rxjs/operators'
 import { Product } from '../models/product';
+import { Cart } from '../models/cart';
 
 @Injectable()
 export class CommonService extends BaseService {
@@ -17,6 +18,10 @@ export class CommonService extends BaseService {
 			.pipe(
 				catchError(val => this.handleError(new HttpErrorResponse(val)))
 			);
+	}
+
+	clearLocalStorage(){
+		localStorage.removeItem('products');
 	}
 
 	getAllProduct(): Observable<Product[]> {
@@ -82,4 +87,23 @@ export class CommonService extends BaseService {
 			);
 	}
 
+	saveShipment(_cart: Cart) {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+			})
+		}
+		 _cart.OrderProduct = [];
+		var products = this.getAllLocalProduct();
+		for (var i in products){
+			_cart["OrderProduct"].push({"ProductID":i,"Quantity": products[i]});
+		}
+
+		return this.http.post(`${environment.baseUrl}/api/General/StoreShipment`, _cart, httpOptions)
+			.pipe(
+				catchError(val => this.handleError(new HttpErrorResponse(val)))
+			);
+	}
+
+	
 }
