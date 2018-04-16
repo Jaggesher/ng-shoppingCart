@@ -22,7 +22,7 @@
 					<td>{{shipment.phone}}</td>
 					<td>{{shipment.address}}</td>
 					<td>{{shipment.totalCost}}</td>
-					<td>{{shipment.isDelivered}} <button *ngIf="!shipment.isDelivered" class="btn btn-success">Confirm</button></td>
+					<td>{{shipment.isDelivered}} <button *ngIf="!shipment.isDelivered" class="btn btn-success" (click)="confirm(shipment.id)">Confirm</button></td>
 				</tr>
 			</tbody>
 		</table>

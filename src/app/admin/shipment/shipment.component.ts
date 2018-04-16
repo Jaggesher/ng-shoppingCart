@@ -29,4 +29,20 @@ export class ShipmentComponent implements OnInit {
     this.getShipment();
   }
 
+  confirm(shipment: String) {
+    this.isRequesting = true;
+
+    this._adminService.confirmShipment(shipment).subscribe(
+      data => {
+        console.log(data);
+        this.isRequesting = false;
+        this.getShipment();
+      }, error => {
+        console.log(error);
+        this.isRequesting = false;
+      }
+    );
+    console.log(shipment);
+  }
+
 }

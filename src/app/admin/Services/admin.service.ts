@@ -81,4 +81,19 @@ export class AdminService extends BaseService {
 		 if(token != null) return true;
 		 return false;
 	}
+
+	confirmShipment(Id):Observable<any>{
+		const httpOptions = {
+			headers: new HttpHeaders({
+			})
+		}
+
+		const fd = new FormData();
+
+		fd.append('id', Id);
+		return this.http.post(`${environment.baseUrl}/api/admin/confirmShipment`, fd)
+			.pipe(
+				catchError(val => this.handleError(new HttpErrorResponse(val)))
+			);
+	}
 }
