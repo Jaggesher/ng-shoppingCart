@@ -24,7 +24,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a routerLinkActive="active" routerLink="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge">4</span></a></li>
+        <li><a routerLinkActive="active" routerLink="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge">{{_commonService.getLocalProductsNumber()}}</span></a></li>
         <li><a routerLinkActive="active" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Admin</a></li>
       </ul>
   </div>

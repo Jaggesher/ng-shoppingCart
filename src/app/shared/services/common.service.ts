@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Category } from '../models/category';
 import { Observable } from 'rxjs/Observable';
 import { BaseService } from './base.service';
-import { catchError, retry } from 'rxjs/operators'
+import { catchError, retry, count } from 'rxjs/operators'
 import { Product } from '../models/product';
 import { Cart } from '../models/cart';
 
@@ -18,6 +18,13 @@ export class CommonService extends BaseService {
 			.pipe(
 				catchError(val => this.handleError(new HttpErrorResponse(val)))
 			);
+	}
+
+	getLocalProductsNumber():number{
+		var products = this.getAllLocalProduct();
+		var Count = 0;
+		for(var i in products) Count += products[i];
+		return Count;
 	}
 
 	clearLocalStorage(){
@@ -104,6 +111,8 @@ export class CommonService extends BaseService {
 				catchError(val => this.handleError(new HttpErrorResponse(val)))
 			);
 	}
+
+
 
 	
 }
