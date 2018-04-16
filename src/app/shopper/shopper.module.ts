@@ -5,6 +5,7 @@ import { ShopperRoutingModule } from './shopper-routing.module';
 import { ProductsComponent } from './products/products.component';
 import { SharedModule } from '../shared/modules/shared/shared.module';
 import { ProductComponent } from './product/product.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { ProductComponent } from './product/product.component';
     ShopperRoutingModule,
     SharedModule
   ],
-  declarations: [ProductsComponent, ProductComponent]
+  declarations: [ProductsComponent, ProductComponent, CartComponent]
 })
 export class ShopperModule { }
