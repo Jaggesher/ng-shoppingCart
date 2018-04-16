@@ -95,8 +95,11 @@ export class CartComponent implements OnInit {
             );
         }
 
+    }
 
-        console.log(this.cartForm.value);
+    ClearStorage(){
+        this._commonService.clearLocalStorage();
+        this.getProducts();
     }
 
 }
