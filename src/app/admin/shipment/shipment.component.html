@@ -1,3 +1,31 @@
-<p>
-  shipment works!
-</p>
+<div class="container">
+	
+	<br>
+	<div class="col-sm-8 col-sm-offset-2 jumbotron">
+		<h2 class="display-5">All Shipments</h2>
+		<hr>
+		<table class="table table-bordered" *ngIf="AllShipment">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Phone</th>
+					<th scope="col">Address</th>
+					<th scope="col"> Total Cost</th>
+					<th scope="col">Deliverd?</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let shipment of AllShipment; let i=index;">
+					<th scope="row">{{i+1}}</th>
+					<td>{{shipment.name}}</td>
+					<td>{{shipment.phone}}</td>
+					<td>{{shipment.address}}</td>
+					<td>{{shipment.totalCost}}</td>
+					<td>{{shipment.isDelivered}} <button *ngIf="!shipment.isDelivered" class="btn btn-success">Confirm</button></td>
+				</tr>
+			</tbody>
+		</table>
+		<app-spinner [isRunning]="isRequesting"></app-spinner> 
+	</div>
+</div>

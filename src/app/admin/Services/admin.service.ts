@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { Credential } from '../Models/credential';
 import { Auth } from '../Models/auth';
+import { Shipment } from '../Models/shipment';
 
 
 @Injectable()
@@ -61,6 +62,13 @@ export class AdminService extends BaseService {
 		return this.http.post(`${environment.baseUrl}/api/auth/login`, _credential, httpOptions)
 			.pipe(
 				catchError(val => this.handleError(new HttpErrorResponse(val)))
+			);
+	}
+
+	getAllShipment():Observable<Shipment[]>{
+		return this.http.get<Shipment[]>(`${environment.baseUrl}/api/admin/AllShipments`)
+			.pipe(
+				catchError(val => this.handleError(val))
 			);
 	}
 
