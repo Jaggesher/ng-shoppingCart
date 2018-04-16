@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../shared/services/common.service';
 import { environment } from '../../../environments/environment';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-cart',
@@ -39,7 +40,22 @@ export class CartComponent implements OnInit {
       Validators.required,
       Validators.maxLength(1000)
     ]);
+  }
 
+  private getProducts()
+  {
+    this.isRequesting = true;
+
+    this._commonService.getAllLocalProductDetails().subscribe(
+      data =>{
+        console.log(data);
+        this.isRequesting = false;
+      },
+      error =>{
+        console.log(error);
+        this.isRequesting = false;
+      }
+    );
   }
 
   constructor(private _commonService: CommonService) { }
@@ -48,6 +64,7 @@ export class CartComponent implements OnInit {
     this.baseUrl = environment.baseUrl;
     this.createFormControls();
     this.createForm();
+    this.getProducts();
   }
 
   onSubmit() {

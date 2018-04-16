@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Category } from '../models/category';
 import { Observable } from 'rxjs/Observable';
 import { BaseService } from './base.service';
@@ -60,6 +60,24 @@ export class CommonService extends BaseService {
 
 	getAllLocalProduct() {
 		return JSON.parse(localStorage.getItem("products"));
+	}
+
+	getAllLocalProductDetails():Observable<Product[]> {
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+			})
+		}
+		
+		var Data = { "Ids": [] }
+		var products = this.getAllLocalProduct();
+		for(var i in products) Data["Ids"].push(i);
+
+		return this.http.post(`${environment.baseUrl}/api/General/GetByIDs`,Data, httpOptions)
+			.pipe(
+				catchError(val => this.handleError(new HttpErrorResponse(val)))
+			);
 	}
 
 }
