@@ -1,3 +1,70 @@
-<p>
-  product works!
-</p>
+<div class="container">
+	<br>
+	<br>
+ 	 <div class="col-sm-12 text-center">
+		<app-spinner [isRunning]="isRequesting"></app-spinner>
+	</div>
+ 	<div class="col-sm-8 col-sm-offset-2" *ngIf="product">
+		<div class="container-fluid">
+			<div class="row panel panel-info clearfix" style="padding-top: .4cm;">
+				<div class="col-sm-6">
+					<div class="thumbnail">
+						<img src="{{baseUrl+'/'+product.img}}" alt="Nature" style="width:100%">
+					</div>
+				</div>
+				<div class=" col-sm-6">
+					<table class="table table-condensed">
+						<tbody>
+							<tr>
+								<td class="active"><strong><i>Category:  </i></strong></td>
+								<td class="info">{{product.category.productCategory}}</td>
+							</tr>
+							<tr>
+								<td class="active" ><strong><i>Price:  </i></strong></td>
+								<td class="success">{{product.price}}tk</td>
+							</tr>
+							<tr>
+								<td class="active" ><strong><i>InStock:  </i></strong></td>
+								<td class="danger">{{product.inStock}}</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<hr>
+					<h5><strong><i>Description: </i></strong></h5>
+					<p>{{product.description}}</p>
+					<hr>
+					
+
+		
+					<div class="clearfix">
+						<label for="quantity" class="col-sm-3">Quantity: </label>
+						<div id="quantity" class="input-group col-sm-9">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" (click)="deduceByOne()" >-</button>
+							</span>
+
+							<input type="text" class="form-control" [value]="quantity" readonly>
+
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" (click)="increaseByOne()">+</button>
+							</span>
+						</div><!-- /input-group -->
+					</div><!-- /.col-lg-6 -->
+					<br>
+					<div class="col-sm-12 text-center">
+						<div style="padding-bottom:20px;">
+							<button [disabled]='!quantity' class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add To Cart</button>
+						</div> 
+					</div>
+					      
+
+				</div>
+			</div>
+		</div>
+  	</div>
+
+</div>

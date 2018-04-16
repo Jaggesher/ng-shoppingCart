@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonService } from '../../shared/services/common.service';
 import { Product } from '../../shared/models/product';
 import { error } from 'protractor';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-product',
@@ -10,15 +11,22 @@ import { error } from 'protractor';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  public Product: Product;
+  public product: Product;
+  public baseUrl;
+  public quantity: number;
+  public isRequesting: boolean;
   getProduct(id) {
     console.log(id);
+    this.isRequesting = true;
+
     this._commonService.getProduct(id).subscribe(
       data => {
-        this.Product = data;
-        console.log(this.Product);
+        this.product = data;
+        console.log(this.product);
+        this.isRequesting = false;
       },
       error => {
+        this.isRequesting = false;
         console.log(error);
       }
     );
@@ -28,8 +36,18 @@ export class ProductComponent implements OnInit {
   constructor(private route: ActivatedRoute, private _commonService: CommonService) { }
 
   ngOnInit() {
+    this.quantity = 0;
     const id = this.route.snapshot.paramMap.get('id');
+    this.baseUrl = environment.baseUrl;
     this.getProduct(id);
   }
 
+  public increaseByOne() {
+    if (this.quantity < this.product.inStock) this.quantity += 1;
+  }
+
+  public deduceByOne() {
+
+    if (this.quantity > 0) this.quantity -= 1;
+  }
 }
