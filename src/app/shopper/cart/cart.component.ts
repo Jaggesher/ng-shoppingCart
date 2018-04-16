@@ -3,6 +3,7 @@ import { CommonService } from '../../shared/services/common.service';
 import { environment } from '../../../environments/environment';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { error } from 'protractor';
+import { Product } from '../../shared/models/product';
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +17,8 @@ export class CartComponent implements OnInit {
   public name: FormControl;
   public address: FormControl;
   public phone: FormControl;
+  public products: Product[];
+  public total : number;
 
   private createForm() {
     this.cartForm = new FormGroup({
@@ -42,16 +45,19 @@ export class CartComponent implements OnInit {
     ]);
   }
 
-  private getProducts()
-  {
+  private getProducts() {
     this.isRequesting = true;
-
+    this.total = 0;
     this._commonService.getAllLocalProductDetails().subscribe(
-      data =>{
-        console.log(data);
+      data => {
+        this.products = data;
+        data.forEach(element => {
+          element.inStock = this._commonService.getLocalProductQuantity(element.id);
+          this.total += (element.inStock*element.price);
+        });
         this.isRequesting = false;
       },
-      error =>{
+      error => {
         console.log(error);
         this.isRequesting = false;
       }

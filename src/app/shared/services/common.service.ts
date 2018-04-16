@@ -33,9 +33,6 @@ export class CommonService extends BaseService {
 			);
 	}
 
-	initLocalProduct() {
-
-	}
 
 	addProductToLocal(id: string, quantity: number) {
 		try {
@@ -62,19 +59,24 @@ export class CommonService extends BaseService {
 		return JSON.parse(localStorage.getItem("products"));
 	}
 
-	getAllLocalProductDetails():Observable<Product[]> {
+	getLocalProductQuantity(id: string): number {
+		var products = this.getAllLocalProduct();
+		return products[id];
+	}
+
+	getAllLocalProductDetails(): Observable<Product[]> {
 
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Content-Type': 'application/json',
 			})
 		}
-		
+
 		var Data = { "Ids": [] }
 		var products = this.getAllLocalProduct();
-		for(var i in products) Data["Ids"].push(i);
+		for (var i in products) Data["Ids"].push(i);
 
-		return this.http.post(`${environment.baseUrl}/api/General/GetByIDs`,Data, httpOptions)
+		return this.http.post<Product[]>(`${environment.baseUrl}/api/General/GetByIDs`, Data, httpOptions)
 			.pipe(
 				catchError(val => this.handleError(new HttpErrorResponse(val)))
 			);

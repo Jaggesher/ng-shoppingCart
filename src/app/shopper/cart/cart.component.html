@@ -2,33 +2,27 @@
 	<div class="col-sm-8 col-sm-offset-2">
 		<table class="table table-bordered">
 			<thead>
-				<tr>
-				<th>ProdictImage</th>
-				<th>Quantity</th>
-				<th>Price</th>
-				<th>Total</th>
+				<tr class="info">
+					<th>ProdictImage</th>
+					<th>Quantity</th>
+					<th>Price/perUnit</th>
+					<th>Total</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-				<td>John</td>
-				<td>Doe</td>
-				<td>john@example.com</td>
-				<td>com</td>
-				</tr>
-				<tr>
-				<td>Mary</td>
-				<td>Moe</td>
-				<td>mary@example.com</td>
-				<td>com</td>
-				</tr>
-				<tr>
-				<td>July</td>
-				<td>Dooley</td>
-				<td>july@example.com</td>
-				<td>com</td>
+			<tbody *ngIf="products">
+				<tr  *ngFor="let product of products">
+					<td class="text-center"><img src="{{baseUrl+'/'+product.img}}" alt="Nature"></td>
+					<td>{{product.inStock}}</td>
+					<td>{{product.price}}</td>
+					<td>{{product.inStock * product.price}}</td>
 				</tr>
 			</tbody>
+			<tfoot>
+				<tr class="success">
+					<td colspan="3">Total: </td>
+					<td >{{total}}</td>
+				</tr>
+			</tfoot>
 			</table>
 	</div>
 
